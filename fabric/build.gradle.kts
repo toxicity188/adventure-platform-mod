@@ -2,7 +2,6 @@ import net.fabricmc.loom.api.RemapConfigurationSettings
 import net.fabricmc.loom.task.GenerateSourcesTask
 import net.fabricmc.loom.task.RemapJarTask
 import net.fabricmc.loom.task.RunGameTask
-import org.gradle.configurationcache.extensions.capitalized
 
 plugins {
   alias(libs.plugins.loom)
@@ -90,7 +89,7 @@ fun createSecondarySet(name: String, action: Action<SourceSet> = Action { }): So
     extendsFrom(setConfig)
   }
 
-  loom.addRemapConfiguration("mod${name.capitalized()}") {
+  loom.addRemapConfiguration("mod${name.first().uppercase() + name.drop(1)}") {
     sourceSet = set
     targetConfigurationName = name
     onCompileClasspath = true

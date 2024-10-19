@@ -115,6 +115,16 @@ class ComponentConversionTest extends BootstrappedTest {
     assertJsonTreesEqual(serializedNative, serialized);
   }
 
+  @TestOnComponents
+  void testComponentEquality(final Component input) {
+    final net.minecraft.network.chat.Component deepConverted = new NonWrappingComponentSerializer(BootstrappedTest::lookup).serialize(input);
+    final net.minecraft.network.chat.Component wrapped = this.asNativeWrapped(input);
+    final net.minecraft.network.chat.Component wrapped2 = this.asNativeWrapped(input);
+    assertEquals(wrapped, wrapped2, "two wrapped components should be equal");
+    assertEquals(deepConverted, wrapped, "deep should equal wrapped");
+    assertEquals(wrapped, deepConverted, "wrapped should equal deep");
+  }
+
   private static void assertJsonTreesEqual(final JsonElement expected, final JsonElement actual) {
     assertEquals(toStableString(expected), toStableString(actual));
   }
