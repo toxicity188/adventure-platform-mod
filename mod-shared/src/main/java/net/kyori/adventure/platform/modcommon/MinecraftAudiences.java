@@ -26,6 +26,7 @@ package net.kyori.adventure.platform.modcommon;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 import net.kyori.adventure.chat.SignedMessage;
 import net.kyori.adventure.identity.Identified;
@@ -49,6 +50,7 @@ import net.kyori.adventure.text.flattener.ComponentFlattener;
 import net.kyori.adventure.text.renderer.ComponentRenderer;
 import net.kyori.adventure.text.serializer.ComponentSerializer;
 import net.kyori.adventure.util.ComponentMessageThrowable;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.MessageSignature;
 import net.minecraft.network.chat.PlayerChatMessage;
@@ -155,6 +157,22 @@ public interface MinecraftAudiences {
   }
 
   /**
+   * Return a ComponentSerializer instance that will do deep conversions between
+   * Adventure {@link Component Components} and Minecraft {@link net.minecraft.network.chat.Component Components}.
+   *
+   * <p>This serializer will never wrap text, and can provide {@link net.minecraft.network.chat.MutableComponent}
+   * instances suitable for passing around the game. This variant is available to create such a serializer without game context.
+   * For in-game use, {@link #nonWrappingSerializer()} may be simpler.</p>
+   *
+   * @param provider a provider of registry information
+   * @return a serializer instance
+   * @since 6.1.0
+   */
+  static @NotNull ComponentSerializer<Component, Component, net.minecraft.network.chat.Component> nonWrappingSerializer(final Supplier<HolderLookup.Provider> provider) {
+    return new NonWrappingComponentSerializer(provider);
+  }
+
+  /**
    * Expose a Brigadier CommandSyntaxException's message using the adventure-provided interface for rich-message exceptions.
    *
    * @param ex the exception to cast
@@ -170,7 +188,7 @@ public interface MinecraftAudiences {
   }
 
   /**
-   * Return a TextSerializer instance that will do deep conversions between
+   * Return a ComponentSerializer instance that will do deep conversions between
    * Adventure {@link Component Components} and Minecraft {@link net.minecraft.network.chat.Component Components}.
    *
    * <p>This serializer will never wrap text, and can provide {@link net.minecraft.network.chat.MutableComponent}
