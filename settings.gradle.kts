@@ -62,8 +62,8 @@ includeAndRename("fabric")
 includeAndRename("adventure-platform-fabric:mod-shared-repack", "mod-shared-fabric-repack")
 
 // NeoForge
-/*
+
 includeAndRename("neoforge")
 includeAndRename("adventure-platform-neoforge:tester", "neoforge-tester")
 includeAndRename("adventure-platform-neoforge:services", "neoforge-services")
- */
+
