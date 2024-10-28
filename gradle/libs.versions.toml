@@ -1,5 +1,5 @@
 [metadata]
-version = "1.0"
+format = { version = "1.1" }
 
 [versions]
 adventure = "4.17.0"
@@ -8,16 +8,16 @@ ansi = "1.1.0"
 autoService = "1.1.1"
 checkstyle = "10.18.2"
 examination = "1.3.0"
-fabricApi = "0.106.1+1.21.2"
-fabricLoader = "0.16.7"
+fabricApi = "0.107.0+1.21.3"
+fabricLoader = "0.16.8"
 indra = "3.1.3"
 junit = "5.11.2"
-minecraft = "1.21.2"
+minecraft = "1.21.3"
 parchment = "1.21:2024.07.28"
 vineflower = "1.10.1"
 spotless = "6.25.0"
-neoforge = "21.2.0-beta"
-neoform = "1.21.2-20241022.151510"
+neoforge = "21.3.4-beta"
+neoform = "1.21.3-20241023.131943"
 
 [libraries]
 adventure-api = { module = "net.kyori:adventure-api", version.ref = "adventure" }
@@ -51,7 +51,7 @@ fabric-api-base = { module = "net.fabricmc.fabric-api:fabric-api-base" }
 fabric-api-networking = { module = "net.fabricmc.fabric-api:fabric-networking-api-v1" }
 fabric-api-command = { module = "net.fabricmc.fabric-api:fabric-command-api-v2" }
 fabric-api-lifecycle = { module = "net.fabricmc.fabric-api:fabric-lifecycle-events-v1" }
-fabric-permissionsApi = { module = "me.lucko:fabric-permissions-api", version = "0.3.1" }
+fabric-permissionsApi = { module = "me.lucko:fabric-permissions-api", version = "0.3.2" }
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 
 # neoforge
