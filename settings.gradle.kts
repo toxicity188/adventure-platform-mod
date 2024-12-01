@@ -20,7 +20,7 @@ pluginManagement {
 plugins {
   id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
   id("fabric-loom") version "1.9.2"
-  id("net.neoforged.moddev.repositories") version "1.0.23"
+  id("net.neoforged.moddev.repositories") version "2.0.52-beta"
 }
 
 rootProject.name = "adventure-platform-mod-parent"
