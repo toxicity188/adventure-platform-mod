@@ -2,6 +2,7 @@ plugins {
   alias(libs.plugins.loom)
   alias(libs.plugins.indra)
   alias(libs.plugins.indra.publishing)
+  id("standard-conventions")
 }
 
 dependencies {
