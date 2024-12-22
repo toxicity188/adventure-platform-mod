@@ -86,6 +86,20 @@ public final class DataComponentValueConverterProvider implements DataComponentV
         DataComponentValue.Removed.class,
         ModDataComponentValue.class,
         (k, $) -> ModDataComponentValue.Removed.INSTANCE
+      ),
+      DataComponentValueConverterRegistry.Conversion.convert(
+        DataComponentValue.TagSerializable.class,
+        GsonDataComponentValue.class,
+        (k, tagSerializable) -> {
+          final Tag decodedSnbt;
+          try {
+            decodedSnbt = tagSerializable.asBinaryTag().get(ModDataComponentValue.SNBT_CODEC);
+          } catch (final CommandSyntaxException ex) {
+            throw new IllegalArgumentException("Unable to parse SNBT value", ex);
+          }
+
+          return GsonDataComponentValue.gsonDataComponentValue(NbtOps.INSTANCE.convertTo(JsonOps.INSTANCE, decodedSnbt));
+        }
       )
     );
   }
