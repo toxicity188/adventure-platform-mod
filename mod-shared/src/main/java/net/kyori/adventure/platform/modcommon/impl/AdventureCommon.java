@@ -23,7 +23,6 @@
  */
 package net.kyori.adventure.platform.modcommon.impl;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.mojang.logging.LogUtils;
 import java.util.List;
 import java.util.Locale;
@@ -68,11 +67,13 @@ public final class AdventureCommon {
 
   static {
     // Daemon thread executor for scheduled tasks
-    SCHEDULER = Executors.newSingleThreadScheduledExecutor(new ThreadFactoryBuilder()
-      .setNameFormat("adventure-platform-mod-scheduler-%d")
-      .setDaemon(true)
-      .setUncaughtExceptionHandler((thread, ex) -> LOGGER.error("An uncaught exception occurred in scheduler thread '{}':", thread.getName(), ex))
-      .build());
+    SCHEDULER = Executors.newSingleThreadScheduledExecutor(
+      Thread.ofPlatform()
+        .name("adventure-platform-mod-scheduler", 0)
+        .uncaughtExceptionHandler((thread, ex) -> LOGGER.error("An uncaught exception occurred in scheduler thread '{}':", thread.getName(), ex))
+        .daemon()
+        .factory()
+    );
     final var platformHooks = discoverHooks();
     HOOKS = platformHooks;
     FLATTENER = createFlattener(platformHooks);
