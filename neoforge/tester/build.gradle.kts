@@ -4,7 +4,7 @@ plugins {
 }
 
 neoForge {
-  version = libs.versions.neoforge
+  version = libs.versions.neoforge.get()
 
   validateAccessTransformers = true
 
