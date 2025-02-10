@@ -4,7 +4,7 @@ plugins {
 }
 
 neoForge {
-  neoFormVersion = libs.versions.neoform
+  neoFormVersion = libs.versions.neoform.get()
 
   parchment {
     parchmentArtifact = "org.parchmentmc.data:parchment-${libs.versions.parchment.get()}@zip"
